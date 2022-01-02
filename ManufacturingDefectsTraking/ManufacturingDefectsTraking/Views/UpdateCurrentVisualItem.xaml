@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ManufacturingDefectsTraking.Views.UpdateCurrentVisualItem"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:conv="clr-namespace:ManufacturingDefectsTraking.Converters"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Update Visual Item"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="Title" />
+            <Entry Placeholder="Title" Text="{Binding ItemToBeUpdated.Title}" />
+            <Label Text="Description" />
+            <Entry Placeholder="Description" Text="{Binding ItemToBeUpdated.Description}" />
+            <Label Text="Date" />
+            <DatePicker Date="{Binding ItemToBeUpdated.Date}" />
+            <Label Text="Status" />
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding TakeImageByCameraCommand}"
+                HeightRequest="40"
+                IsVisible="{Binding IsCameraIconVisible}"
+                Source="CameraIcon.jpeg"
+                WidthRequest="40" />
+            <StackLayout IsVisible="{Binding IsCameraIconVisible, Converter={conv:InverseBoolConverter}}" Orientation="Horizontal">
+                <Image
+                    HeightRequest="100"
+                    Source="{Binding Picture}"
+                    WidthRequest="100" />
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    Command="{Binding DeleteImageCommand}"
+                    HeightRequest="50"
+                    Source="Delete.png"
+                    WidthRequest="50" />
+            </StackLayout>
+
+            <Picker ItemsSource="{Binding ItemStatusList}" SelectedIndex="{Binding ItemToBeUpdated.Status}" />
+            <Button
+                BackgroundColor="#00A5F2"
+                Command="{Binding UpdateItemCommand}"
+                CornerRadius="15"
+                Text="Update Item"
+                TextColor="White" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

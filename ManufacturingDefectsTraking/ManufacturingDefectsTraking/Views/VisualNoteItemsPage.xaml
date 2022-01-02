@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ManufacturingDefectsTraking.Views.VisualNoteItemsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    x:Name="RootPage"
+    Title="Visual Note Items"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#eff1e3">
+    <Grid Padding="10">
+        <CollectionView ItemsSource="{Binding ItemsList}">
+            <CollectionView.EmptyView>
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Label Text="No data to be dispalyed" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"></Label>
+
+                </StackLayout>            </CollectionView.EmptyView>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItemView>
+                                    <StackLayout
+                                        Padding="10"
+                                        HorizontalOptions="Start"
+                                        Orientation="Horizontal"
+                                        Spacing="10">
+                                        <ImageButton
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding BindingContext.UpdateItemCommand, Source={x:Reference RootPage}}"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="40"
+                                            HorizontalOptions="Start"
+                                            Source="Edit.png"
+                                            WidthRequest="40" />
+                                        <ImageButton
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference RootPage}}"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="40"
+                                            HorizontalOptions="Start"
+                                            Source="Delete.png"
+                                            WidthRequest="40" />
+                                    </StackLayout>
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Frame
+                            BackgroundColor="White"
+                            CornerRadius="15"
+                            HasShadow="False"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Start">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="{Binding Title}" />
+                                    <Label FontSize="Small" Text="{Binding Description}" />
+                                    <Image HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="80" WidthRequest="80" Source="{Binding ItemImageSource}" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="Small" Text="{Binding Date}" />
+                                        <Label HorizontalOptions="EndAndExpand" Text="{Binding DisplayingStatus}">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding Status}"
+                                                    TargetType="Label"
+                                                    Value="0">
+                                                    <Setter Property="TextColor" Value="Green" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding Status}"
+                                                    TargetType="Label"
+                                                    Value="1">
+                                                    <Setter Property="TextColor" Value="Red" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ImageButton
+            BackgroundColor="Transparent"
+            Command="{Binding NavigatetoAddNewVisualItemPageCommand}"
+            HeightRequest="60"
+            HorizontalOptions="End"
+            Source="FloatingBtn.png"
+            VerticalOptions="End"
+            WidthRequest="60" />
+
+    </Grid>
+
+</ContentPage>

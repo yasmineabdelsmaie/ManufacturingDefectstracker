@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ManufacturingDefectsTraking.Views.AddNewVisualItemPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Add New Visual Item"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#eff1e3"
+    NavigationPage.HasBackButton="True">
+    <ScrollView Padding="10">
+        <StackLayout Padding="10">
+            <Label Text="Title" />
+            <Entry Placeholder="Title" Text="{Binding Title}" />
+            <Label Text="Description" />
+            <Entry Placeholder="Description" Text="{Binding Description}" />
+            <Label Text="Date" />
+            <DatePicker Date="{Binding Date}" />
+            <Label Text="Picture" />
+            <ImageButton
+                IsVisible="{Binding IsCameraIconVisible}"
+                BackgroundColor="Transparent"
+                Command="{Binding TakeImageByCameraCommand}"
+                HeightRequest="50"
+                HorizontalOptions="Start"
+                Source="CameraIcon.jpeg"
+                WidthRequest="50" />
+            <Image
+                HorizontalOptions="Start"
+                HeightRequest="100"
+                Source="{Binding Picture}"
+                WidthRequest="100" />
+            <Button
+                BackgroundColor="#00A5F2"
+                Command="{Binding AddNewVisualItemCommand}"
+                CornerRadius="15"
+                Text="Add New Item"
+                TextColor="White" />
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>
